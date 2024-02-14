@@ -1,3 +1,6 @@
 
 PointCloudFileConverter/PointCloudFileConverter/bin/Release/apt_tab.csv
 PointCloudFileConverter/PointCloudFileConverter/bin/Release/toto.txt
+PointCloudFileConverter/PointCloudFileConverter/bin/Release/OutputFolder/*
+*.pdb
+

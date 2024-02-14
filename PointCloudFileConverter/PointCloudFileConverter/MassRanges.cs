@@ -86,7 +86,7 @@ namespace PointCloudFileConverter
         };
 
 
-        public static MoleculeType GetMoleculeTypeFromMass(float mass, MoleculeType notFound = MoleculeType.Si)
+        public static MoleculeType GetMoleculeTypeFromMass(float mass, MoleculeType notFound = MoleculeType.Unknown)
         {
             for (int i = 0; i < MASSRANGES.Count; i++)
             {

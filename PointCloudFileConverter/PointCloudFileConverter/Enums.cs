@@ -8,6 +8,7 @@ namespace PointCloudFileConverter
 {
     public enum MoleculeType
     {
+        Unknown,
         Si,
         Cr,
         Fe,

@@ -125,46 +125,50 @@ namespace PointCloudFileConverter
 
             foreach (var item in moleculeDictionary)
             {
-                Console.WriteLine("Writing " + item.Key.ToString() + " " + item.Value.Count);
-                int currentPoint = 0;
-                
-                int currentIndex = 0;
 
-
-                string[] content = new string[pointperfile];
-                while (currentPoint < item.Value.Count)
+                if (item.Key != MoleculeType.Unknown)
                 {
-                    content[currentIndex] = item.Value[currentPoint].ToCsv();
+
+                    Console.WriteLine("Writing " + item.Key.ToString() + " " + item.Value.Count);
+                    int currentPoint = 0;
+
+                    int currentIndex = 0;
 
 
-                    if (currentPoint == item.Value.Count - 1)
+                    string[] content = new string[pointperfile];
+                    while (currentPoint < item.Value.Count)
                     {
-                        //On est en bout de liste, on ecrit un fichier
+                        content[currentIndex] = item.Value[currentPoint].ToCsv();
 
-                        string filename = folderPath + "/" + item.Key.ToString() + "_" + fileindex + ".txt";
-                        File.WriteAllLines(filename, content.ToList().GetRange(0, currentIndex));
-                        currentIndex = 0;
-                    }
-                    else
-                    {
-                        if (currentIndex == pointperfile - 1)
+
+                        if (currentPoint == item.Value.Count - 1)
                         {
-                            Console.WriteLine("Writing file " + fileindex);
+                            //On est en bout de liste, on ecrit un fichier
+
                             string filename = folderPath + "/" + item.Key.ToString() + "_" + fileindex + ".txt";
-                            File.WriteAllLines(filename, content);
-                            fileindex++;
+                            File.WriteAllLines(filename, content.ToList().GetRange(0, currentIndex));
                             currentIndex = 0;
                         }
                         else
                         {
-                            currentIndex++;
+                            if (currentIndex == pointperfile - 1)
+                            {
+                                Console.WriteLine("Writing file " + fileindex);
+                                string filename = folderPath + "/" + item.Key.ToString() + "_" + fileindex + ".txt";
+                                File.WriteAllLines(filename, content);
+                                fileindex++;
+                                currentIndex = 0;
+                            }
+                            else
+                            {
+                                currentIndex++;
+                            }
                         }
+                        currentPoint++;
                     }
-                    currentPoint++;
+
+                    //il faut écrire le dernier fichier !
                 }
-
-                //il faut écrire le dernier fichier !
-
             }
         }
 
